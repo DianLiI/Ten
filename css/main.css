@@ -27,9 +27,11 @@
 .flat-grid-row {
 	margin-bottom: 15px; 
 }
+
 .flat-grid-row:last-child {
     margin-bottom: 0; 
 }
+
 .flat-grid-row:after {
     content: "";
     display: block;
@@ -44,6 +46,11 @@
 	border-radius: 3px;
 	background: rgba(238, 228, 218, 0.35); 
 }
+
+.flat-grid-cell:hover{
+	opacity: 0.5; 
+}
+
 .flat-grid-cell:last-child {
 	margin-right: 0; 
 }
@@ -72,3 +79,28 @@
 	border-radius: 3px;
 	background: rgba(238, 228, 218, 0.35); 
 }
+
+@-webkit-keyframes move-up {
+  0% {
+    top: 25px;
+    opacity: 1; }
+
+  100% {
+    top: -50px;
+    opacity: 0; } }
+@-moz-keyframes move-up {
+  0% {
+    top: 25px;
+    opacity: 1; }
+
+  100% {
+    top: -50px;
+    opacity: 0; } }
+@keyframes move-up {
+  0% {
+    top: 25px;
+    opacity: 1; }
+
+  100% {
+    top: -50px;
+    opacity: 0; } }
