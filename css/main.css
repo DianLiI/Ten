@@ -47,10 +47,6 @@
 	background: rgba(238, 228, 218, 0.35); 
 }
 
-.flat-grid-cell:hover{
-	opacity: 0.5; 
-}
-
 .flat-grid-cell:last-child {
 	margin-right: 0; 
 }
@@ -58,9 +54,11 @@
 .flat-inner-grid-row {
 	margin-bottom: 10px; 
 }
+
 .flat-inner-grid-row:last-child {
     margin-bottom: 0; 
 }
+
 .flat-inner-grid-row:after {
     content: "";
     display: block;
@@ -71,6 +69,10 @@
 	margin-right: 0;
 }
 
+.hovered {
+	opacity: 0.5;
+}
+
 .flat-inner-grid-cell {
 	width: 41.75px;
 	height: 41.75px;
@@ -78,6 +80,14 @@
 	float: left;
 	border-radius: 3px;
 	background: rgba(238, 228, 218, 0.35); 
+}
+
+.red-selected {
+	background: red;
+}
+
+.blue-selected {
+	background-color: blue;
 }
 
 @-webkit-keyframes move-up {
