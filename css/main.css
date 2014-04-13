@@ -1,4 +1,4 @@
-#game-container {
+.game-container {
 	margin-top: 40px;
 	position: relative;
 	padding: 15px;
@@ -19,26 +19,26 @@
 	box-sizing: border-box; 
 }
 
-#flat-grid-container {
+.indicator-board {
 	position: absolute;
 	z-index: 1; 
 }
 
-.flat-grid-row {
+.indicator-row {
 	margin-bottom: 15px; 
 }
 
-.flat-grid-row:last-child {
+.indicator-row:last-child {
     margin-bottom: 0; 
 }
 
-.flat-grid-row:after {
+.indicator-row:after {
     content: "";
     display: block;
     clear: both; 
 }
 
-.flat-grid-cell {
+.indicator-cell {
 	width: 146.25px;
 	height: 146.25px;
 	margin-right: 15px;
@@ -47,33 +47,25 @@
 	background: rgba(238, 228, 218, 0.35); 
 }
 
-.flat-grid-cell:last-child {
+.indicator-cell:last-child {
 	margin-right: 0; 
 }
 
-.flat-inner-grid-row {
+.indicator-innerRow {
 	margin-bottom: 10px; 
 }
 
-.flat-inner-grid-row:last-child {
+.indicator-innerRow:last-child {
     margin-bottom: 0; 
 }
 
-.flat-inner-grid-row:after {
+.indicator-innerRow:after {
     content: "";
     display: block;
     clear: both; 
 }
 
-.flat-inner-grid-cell:last-child {
-	margin-right: 0;
-}
-
-.hovered {
-	opacity: 0.5;
-}
-
-.flat-inner-grid-cell {
+.indicator-innerCell{
 	width: 41.75px;
 	height: 41.75px;
 	margin-right: 10px;
@@ -82,13 +74,88 @@
 	background: rgba(238, 228, 218, 0.35); 
 }
 
-.red-selected {
+.indicator-innerCell:last-child {
+	margin-right: 0;
+}
+
+.indicator-board {
+	position: absolute;
+	z-index: 1; 
+}
+
+.indicator-row-shrinked {
+	margin-bottom: 1.5px; 
+}
+
+.indicator-cell-shrinked {
+	width: 45px;
+	height: 45px;
+	margin-right: 1.5px;
+	float: left;
+	border-radius: 3px;
+	background: rgba(238, 228, 218, 0.35); 
+}
+
+.indicator-innerRow-shrinked {
+	margin-bottom: 1px; 
+}
+
+.indicator-innerCell-shrinked{
+	width: 13.5px;
+	height: 13.5px;
+	margin-right: 1px;
+	float: left;
+	border-radius: 3px;
+	background: rgba(238, 228, 218, 0.35); 
+}
+
+.tictactoe-board {
+	margin-top:150px;
+	z-index: 1; 
+}
+
+.tictactoe-row {
+	margin-bottom: 12px; 
+}
+
+.tictactoe-row:last-child {
+    margin-bottom: 0; 
+}
+
+.tictactoe-row:after {
+    content: "";
+    display: block;
+    clear: both; 
+}
+
+.tictactoe-cell {
+	width: 100px;
+	height: 100px;
+	margin-right: 12px;
+	float: left;
+	border-radius: 3px;
+	background: rgba(238, 228, 218, 0.35); 
+}
+
+.tictactoe-cell:last-child {
+	margin-right: 0; 
+}
+
+.selected {
+	background: white;
+}
+.hovered {
+	opacity: 0.5;
+}
+
+.red {
 	background: red;
 }
 
-.blue-selected {
-	background-color: blue;
+.blue {
+	background: blue;
 }
+
 
 @-webkit-keyframes move-up {
   0% {
@@ -114,3 +181,5 @@
   100% {
     top: -50px;
     opacity: 0; } }
+	
+	

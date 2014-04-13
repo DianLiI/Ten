@@ -2,56 +2,16 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Ten</title>
-		<link href="css/main.css" rel="stylesheet" type="text/css">
+		<link href="css/jquery.gridster.min.css" rel="stylesheet">
+		<link href="css/main.css" rel="stylesheet">
 	</head>
 	<body>
-		<div id="container">
-			<div id="heading">
-				<h1>Ten</h1>
-			</div>
-			<div id="before-game">
-				<p id="game-intro">Game introduction</p>
-				<p id="how-to-play">How to play</p>
-			</div>
-			<div id="game-container">
-				<div id="bottons"></div>
-				<div id="flat-board" class="game-board">
-					<div id="flat-grid-container"></div>
-				</div>
-			</div>
-		</div>
+		<div class="game-container"></div>
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script src="js/main.js"></script>
-		<script src="js/move.min.js"></script>
 		<script type="text/javascript">
-		$(document).ready(function(){
-			var grid = new Grid(0, {x: 1, y : 2});
-			var anim = new Animation();
-			grid.generateCells();
-			var mm = new MouseManager();
-			mm.on("bigcell-hover", function(data){
-				var div = data.div;
-				div.css("opacity", "0.5");
-				div.mouseleave(function(){
-					div.css("opacity", "1")
-				});
-			});
-			mm.on("bigcell-click", function(data){
-				var div = data.div;
-				var grid = data.grid;
-				pos = div.attr("id").split();
-				var innerGrid = new Grid(0, {x: 1, y : 2});
-				innerGrid.cells[0] = [];
-				innerGrid.cells[1] = [];
-				innerGrid.cells[2] = [];
-				for (y = 0; y < 3; y++){
-					for (x = 0; x < 3; x++){
-						innerGrid.cell[x][y] = gird.cells[pos[0] + x][pos[1] + y];
-					}
-				}
-				anim.zoomIn(innerGrid);
-			});
-		});
+			var gm = new GameManager();
+			gm.setUp();
 		</script>
 	</body>
 </html>
