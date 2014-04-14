@@ -4,8 +4,8 @@ function Grid(size, position){
 	this.cells = [];
 	this.x = position.x;
 	this.y = position.y;
-	this.currx = (this.x + 1) * 146.25;
-	this.curry = (this.y + 1) * 146.25;
+	this.class;
+	this.color = 0;
 	//methods
 	this.generateCells;
 }
@@ -17,11 +17,13 @@ Grid.prototype.generateCells = function (){
 				for (l = 0; l < 3; l++){
 					var position = {x : l + j * 3, y : k + i * 3};
 					size = 41.75;
+					var cell = new Cell(size, position);
+					cell.class = "innerCell-" + position.x + "-" + position.y;
 					if (this.cells[position.x]) {
-						this.cells[position.x][position.y] = new Cell(size, position);
+						this.cells[position.x][position.y] = cell;
 					}else{
 						this.cells[position.x] = [];
-						this.cells[position.x][position.y] = new Cell(size, position);
+						this.cells[position.x][position.y] = cell;
 					}
 				}
 			}
@@ -30,50 +32,14 @@ Grid.prototype.generateCells = function (){
 }
 
 
-function Cell(size, position, div){
+function Cell(size, position){
 	//attributes
 	this.size = size;
 	this.x = position.x;
 	this.y = position.y;
-	this.color;
-	//methods
-	this.update;
-	this.getDiv;
-	this.enlarge;
-}
+	this.color = 0;
+	this.class;
 
-Cell.prototype.update = function (){
-
-	var cellid = "#" + "innerCell-"+ this.x + "-" + this.y;
-	div = this.getDiv(cellid);
-	var browid = "#" + div.parent().parent().parent().attr("id");
-	var bcellid = "#" + div.parent().parent().attr("id");
-	var rowid = "." + div.parent().attr("class");
-	
-	move(rowid)
-		.set("height", "146.25px")
-		.end();
-	move(bcellid)
-		.set("height", "472px")
-		.set("width", "472px")
-		.end()
-	move(browid)
-		.set("height", "472px")
-		.set("float", "left")
-		.end();
-	move(cellid)
-		.set("height", this.size)
-		.set("width", this.size)
-		.end();
-}
-
-Cell.prototype.getDiv = function (id){
-	return $(id);
-}
-
-Cell.prototype.enlarge = function (){
-	this.size = 146.25;
-	this.update();
 }
 
 function MouseManager(){
@@ -87,13 +53,18 @@ function MouseManager(){
 }
 
 MouseManager.prototype.on = function (event, callback) {
-	if (!this.events[event]) {
-		this.events[event] = [];
+	if (callback){
+		if (!this.events[event]) {
+			this.events[event] = [];
+		}
+		this.events[event].push(callback);
+	}else{
+		this.events[event] = this.events[event + "1"];
 	}
-	this.events[event].push(callback);
 };
 
 MouseManager.prototype.off = function (event){
+	this.events[event + "1"] = this.events[event];
 	if (this.events[event]) {
 		this.events[event] = [];
 	};
@@ -110,82 +81,38 @@ MouseManager.prototype.respond = function (event, data){
 
 MouseManager.prototype.listen = function (data){
 	var self = this;
-	$(".indicator-cell").hover(function (){
-		self.respond("indicator-hover", {div:$(this)});
+	$(".cell").hover(function (){
+		self.respond("cell-hover", {div:$(this)});
 	});
 
-	$(".tictactoe-cell").hover(function (){
-		self.respond("tictactoe-hover", {div:$(this), grids: data.grids});
+	$(".innerCell").hover(function (){
+		self.respond("innerCell-hover", {div:$(this), grids: data.grids});
 	});
 
-	$(".indicator-cell").click(function (){
-		self.respond("indicator-click", {div:$(this), grids: data.grids});
+	$(".cell").click(function (){
+		self.respond("cell-click", {div:$(this), grids: data.grids});
 	});
 
-	$(".tictactoe-cell").click(function (){
-		self.respond("tictactoe-click", {div:$(this), grids: data.grids});
+	$(".innerCell").click(function (){
+		self.respond("innerCell-click", {div:$(this), grids: data.grids});
 	});
 };
 
 function HTMLActuator(){
-	this.indicatorSelector = ".indicator-board";
-	this.tictactoeSelector = "tictactoe-board";
-	this.gameContainerSelector = ".game-container";
-	this.indicatorBoard = "";
-	this.tictactoeBoard = "";
-}
-
-HTMLActuator.prototype.shrinkIndicator = function (x, y) {
-	var self = this;
-	$.each($(self.indicatorSelector).children(), function (index_row, row) {
-		$.each($(row).children(), function (index_cell, cell) {
-			$.each($(cell).children(), function(index_innerRow, innerRow) {
-				$.each($(innerRow).children(), function (index_innerCell, innerCell) {
-					$(innerCell).addClass("indicator-innerCell-shrinked");
-				});
-				$(innerRow).addClass("indicator-innerRow-shrinked");
-			});
-			$(cell).addClass("indicator-cell-shrinked");
-			if(index_row == y && index_cell == x){
-				$(cell).addClass("selected");
-			}
-		});
-		$(row).addClass("indicator-row-shrinked");
-	});
-}
-
-HTMLActuator.prototype.showTictactow = function (grid) {
-	$(this.gameContainerSelector).append(this.tictactoeBoard);
-	var div = $(this.tictactoeSelector);
-	$.each(div.children(), function (index_row, row) {
-		$.each($(row).children(), function (index_cell, cell) {
-			var c = grid.cells[index_cell][index_row];
-			if (c.color){
-				$(cell).css("color", c.color);
-			}
-		});
-	});
+	this.gameContainer = ".game-container";
+	this.mainBoard = ".main-board";
 }
 
 HTMLActuator.prototype.init = function (){
-	this.tictactoeBoard = $("<div></div>").addClass("tictactoe-board");
-	this.indicatorBoard = $("<div></div>").addClass("indicator-board");
-	for (y = 0; y < 3; y++){
-		var row = $("<div></div>").addClass("tictactoe-row");
-		for(x = 0; x < 3; x++){
-			var cell = $("<div></div>").addClass("tictactoe-cell").addClass("tictactoe-cell-" + x + "-" + y);
-			row.append(cell);
-		}
-		this.tictactoeBoard.append(row);
-	}
+	var mainBoard = $("<div></div>").addClass("main-board");
 	for (y1 = 0; y1 < 3; y1++){
-		var row = $("<div></div>").addClass("indicator-row");
+		var row = $("<div></div>").addClass("row");
 		for (x1 = 0; x1 < 3; x1++){
-			var cell = $("<div></div>").addClass("indicator-cell").addClass("indicator-cell-" + x1 + "-" + y1);
+			var cell = $("<div></div>").addClass("cell").addClass("cell-" + x1 + "-" + y1);
 			for (y2 = 0; y2 < 3; y2++){
-				var innerRow = $("<div></div>").addClass("indicator-innerRow");
+				var innerRow = $("<div></div>").addClass("innerRow");
 				for (x2 = 0; x2 < 3; x2++){
-					var innerCell = $("<div></div>").addClass("indicator-innerCell");
+					var innerCell = $("<div></div>").addClass("innerCell");
 					innerCell.addClass("innerCell-" + (x2 + x1 * 3) + "-" + (y2 + y1 * 3));
 					innerRow.append(innerCell);
 				}
@@ -193,10 +120,35 @@ HTMLActuator.prototype.init = function (){
 			}
 			row.append(cell);
 		}
-		this.indicatorBoard.append(row);
+		mainBoard.append(row);
 	}
 	
-	$(this.gameContainerSelector).append(this.indicatorBoard);
+	$(this.gameContainer).append(mainBoard);
+}
+
+HTMLActuator.prototype.setOpacity = function (selector, opacity){
+	move(selector).set("opacity", opacity).end();
+}
+
+HTMLActuator.prototype.rotate = function (selector, deg) {
+	move(selector).rotate(deg).end();
+}
+
+HTMLActuator.prototype.selectCell = function (grid, grids) {
+	for (y = 0; y < 3; y++){
+		for (x = 0; x < 3; x++){
+			if(x != grid.x || y != grid.y){
+				this.setOpacity("." + grids[x][y].class, "0.2");
+			}
+		}
+	}
+	this.setColor("." + grid.class, "rgba(238, 228, 218, 0.35)");
+	this.setOpacity("." + grid.class, "1");
+	this.rotate("." + grid.class, 0);
+}
+
+HTMLActuator.prototype.setColor = function (selector, color) {
+	move(selector).set("background", color).end();
 }
 
 
@@ -205,10 +157,50 @@ function GameManager(){
 	this.grids = [[], [], []]
 	this.mouseManager;
 	this.animation;
+	this.player = 0;
+	this.playerZeroColor = "red";
+	this.playerOneColor = "blue";
 	//methods
 	this.setUp;
 };
 
+GameManager.prototype.checkWin = function (grid) {
+	var cells = grid.cells;
+	var row1 = cells[0][0].color + cells[1][0].color + cells[2][0].color;
+	var row2 = cells[0][1].color + cells[1][1].color + cells[2][1].color;
+	var row3 = cells[0][2].color + cells[1][2].color + cells[2][2].color;
+	var col1 = cells[0][0].color + cells[0][1].color + cells[0][2].color;
+	var col2 = cells[1][0].color + cells[1][1].color + cells[1][2].color;
+	var col3 = cells[2][0].color + cells[2][1].color + cells[2][2].color;
+	var dia1 = cells[0][0].color + cells[1][1].color + cells[2][2].color;
+	var dia2 = cells[2][0].color + cells[1][1].color + cells[0][2].color;
+	var small = row1 == 3 || row1 == -3 || row2 == 3 || row2 == -3 || row3 == 3 || row3 == -3 ||
+				col1 == 3 || col1 == -3 || col2 == 3 || col2 == -3 || col3 == 3 || col3 == -3 ||
+				dia1 == 3 || dia1 == -3 || dia2 == 3 || dia2 == -3;
+	if (small) {
+		$("." + grid.class).empty();
+		if (this.player == 0) {
+			this.htmlActuator.setColor("." + grid.class, this.playerZeroColor);
+			grid.color = -1;
+		}else {
+			this.htmlActuator.setColor("." + grid.class, this.playerOneColor);
+			grid.color = 1;
+		};
+		var grids = this.grids;
+		row1 = grids[0][0].color + grids[1][0].color + grids[2][0].color;
+		row2 = grids[0][1].color + grids[1][1].color + grids[2][1].color;
+		row3 = grids[0][2].color + grids[1][2].color + grids[2][2].color;
+		col1 = grids[0][0].color + grids[0][1].color + grids[0][2].color;
+		col2 = grids[1][0].color + grids[1][1].color + grids[1][2].color;
+		col3 = grids[2][0].color + grids[2][1].color + grids[2][2].color;
+		dia1 = grids[0][0].color + grids[1][1].color + grids[2][2].color;
+		dia2 = grids[2][0].color + grids[1][1].color + grids[0][2].color;
+		return 	row1 == 3 || row1 == -3 || row2 == 3 || row2 == -3 || row3 == 3 || row3 == -3 ||
+				col1 == 3 || col1 == -3 || col2 == 3 || col2 == -3 || col3 == 3 || col3 == -3 ||
+				dia1 == 3 || dia1 == -3 || dia2 == 3 || dia2 == -3;
+	};
+	return false;
+}
 GameManager.prototype.setUp = function () {
 	this.mouseManager = new MouseManager();
 	this.htmlActuator = new HTMLActuator();
@@ -228,51 +220,109 @@ GameManager.prototype.setUp = function () {
 					}	
 				}
 			}
+			grid.class = "cell-" + x1 + "-" + y1;
 			this.grids[x1][y1] = grid;
 		}
 	}
-	self = this;
-	this.mouseManager.on("indicator-hover", function(data){
-		var div = data.div;
-		div.css("opacity", "0.5");
-		div.mouseleave(function(){
-			div.css("opacity", "1")
-		});
-	});
-	this.mouseManager.on("indicator-click", function(data){
-		var div = data.div;
-		var grids1 = data.grids;
-		pos = div.attr("class").split(" ")[1].split("-");
-		x = parseInt(pos[2]);
-		y = parseInt(pos[3]);
-		self.htmlActuator.shrinkIndicator(x, y);
-		self.htmlActuator.showTictactow(grids1[x][y]);
-		self.mouseManager.off("indicator-hover");
-		self.mouseManager.on("tictactoe-hover", function(data) {
-			var div = data.div;
-			div.css("opacity", "0.5");
-			div.mouseleave(function(){
-				div.css("opacity", "1")
-			});
-		});
-		self.mouseManager.on("tictactoe-click", function (data) {
-			var div = data.div;
-			var grid = data.grids[x][y];
-			pos = div.attr("class").split(" ")[1].split("-");
-			x = pos[2];
-			y = pos[3];
-			console.log(div);
-			if (self.color = "red"){
-				div.addClass("red")
-				grid.cells[x][y].color = "red";
-			}else{
-				div.addClass("blue");
-				grid.cells[x][y].color = "blue";
-			}
-		});
-		self.mouseManager.listen({grids: data.grids});
-	});
 	this.mouseManager.listen({grids: this.grids});
+	self = this;
+	self.mouseManager.on("cell-hover", function(data){
+		var div = data.div;
+		var grids = self.grids;
+		pos = div.attr("class").split(" ")[1].split("-");
+		var x = parseInt(pos[1]);
+		var y = parseInt(pos[2]);
+		if (!grids[x][y].color){
+			selector = "." + div.attr("class").split(" ")[1];
+			// self.htmlActuator.rotate(selector, 10);
+			move(selector)
+				.scale(1.5)
+				.end();
+			div.mouseleave(function(){
+				self.htmlActuator.rotate(selector, 0);
+			});
+		}
+	});
+	this.mouseManager.on("cell-click", function (data){
+		var div = data.div;
+		var grids = data.grids;
+		pos = div.attr("class").split(" ")[1].split("-");
+		var x = parseInt(pos[1]);
+		var y = parseInt(pos[2]);
+		if (!grids[x][y].color){
+			self.mouseManager.off("cell-hover");
+			self.mouseManager.off("cell-click");
+			self.htmlActuator.selectCell(grids[x][y], grids);
+			self.mouseManager.on("innerCell-hover", function (data) {
+				var div = data.div;
+				var grids = data.grids;
+				pos = div.attr("class").split(" ")[1].split("-");
+				var _x = parseInt(pos[1]);
+				var _y = parseInt(pos[2]);
+				grid_x = Math.floor(_x / 3);
+				grid_y = Math.floor(_y / 3);
+				cell_x = _x % 3;
+				cell_y = _y % 3;
+				var selector = "." + div.attr("class").split(" ")[1];
+				if (!self.grids[grid_x][grid_y].cells[cell_x][cell_y].color && grid_x == x && grid_y == y) {
+					self.htmlActuator.rotate(selector, 180);
+					div.mouseleave(function(){
+						self.htmlActuator.rotate(selector, 0);
+					});
+				};
+			});
+			self.mouseManager.on("innerCell-click", function (data) {
+				var div = data.div;
+				pos = div.attr("class").split(" ")[1].split("-");
+				var _x = parseInt(pos[1]);
+				var _y = parseInt(pos[2]);
+				grid_x = Math.floor(_x / 3);
+				grid_y = Math.floor(_y / 3);
+				cell_x = _x % 3;
+				cell_y = _y % 3;
+				if (!self.grids[grid_x][grid_y].cells[cell_x][cell_y].color && grid_x == x && grid_y == y) {
+					var selector = "." + div.attr("class").split(" ")[1];
+					if (self.player == 0){
+						self.htmlActuator.setColor(selector, self.playerZeroColor);
+						self.grids[grid_x][grid_y].cells[cell_x][cell_y].color = -1;
+					}
+					else{
+						self.htmlActuator.setColor(selector, self.playerOneColor);
+						self.grids[grid_x][grid_y].cells[cell_x][cell_y].color = 1;
+					}
+					self.mouseManager.off("innerCell-click");
+					self.mouseManager.off("innerCell-hover");
+					if (self.checkWin(self.grids[grid_x][grid_y])) {
+						if (self.player == 0){
+							alert("Player1 win");
+						}else{
+							alert("Player2 win");
+						}
+					}else {
+						self.player = 1 - self.player;
+						if (!self.grids[cell_x][cell_y].color) {
+							self.htmlActuator.selectCell(self.grids[cell_x][cell_y], self.grids);
+							x = cell_x;
+							y = cell_y;
+							self.mouseManager.on("innerCell-hover");
+							self.mouseManager.on("innerCell-click");
+						}else {
+							x = cell_x;
+							y = cell_y;
+							for (y1 = 0; y1 < 3; y1++){
+								for (x1 = 0; x1 < 3; x1++){
+									console.log(self.grids[x1][y1].class);
+									self.htmlActuator.setOpacity("." + self.grids[x1][y1].class, "1");
+								}
+							}
+							self.mouseManager.on("cell-hover");
+							setTimeout(function() {self.mouseManager.on("cell-click");}, 10);
+						};
+					}
+				}
+			});
+		}
+	});
 	
 }
 

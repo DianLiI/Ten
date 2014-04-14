@@ -19,26 +19,26 @@
 	box-sizing: border-box; 
 }
 
-.indicator-board {
+.main-board {
 	position: absolute;
 	z-index: 1; 
 }
 
-.indicator-row {
+.row {
 	margin-bottom: 15px; 
 }
 
-.indicator-row:last-child {
+.row:last-child {
     margin-bottom: 0; 
 }
 
-.indicator-row:after {
+.row:after {
     content: "";
     display: block;
     clear: both; 
 }
 
-.indicator-cell {
+.cell {
 	width: 146.25px;
 	height: 146.25px;
 	margin-right: 15px;
@@ -47,25 +47,25 @@
 	background: rgba(238, 228, 218, 0.35); 
 }
 
-.indicator-cell:last-child {
+.cell:last-child {
 	margin-right: 0; 
 }
 
-.indicator-innerRow {
+.innerRow {
 	margin-bottom: 10px; 
 }
 
-.indicator-innerRow:last-child {
+.innerRow:last-child {
     margin-bottom: 0; 
 }
 
-.indicator-innerRow:after {
+.innerRow:after {
     content: "";
     display: block;
     clear: both; 
 }
 
-.indicator-innerCell{
+.innerCell{
 	width: 41.75px;
 	height: 41.75px;
 	margin-right: 10px;
@@ -74,71 +74,8 @@
 	background: rgba(238, 228, 218, 0.35); 
 }
 
-.indicator-innerCell:last-child {
+.innerCell:last-child {
 	margin-right: 0;
-}
-
-.indicator-board {
-	position: absolute;
-	z-index: 1; 
-}
-
-.indicator-row-shrinked {
-	margin-bottom: 1.5px; 
-}
-
-.indicator-cell-shrinked {
-	width: 45px;
-	height: 45px;
-	margin-right: 1.5px;
-	float: left;
-	border-radius: 3px;
-	background: rgba(238, 228, 218, 0.35); 
-}
-
-.indicator-innerRow-shrinked {
-	margin-bottom: 1px; 
-}
-
-.indicator-innerCell-shrinked{
-	width: 13.5px;
-	height: 13.5px;
-	margin-right: 1px;
-	float: left;
-	border-radius: 3px;
-	background: rgba(238, 228, 218, 0.35); 
-}
-
-.tictactoe-board {
-	margin-top:150px;
-	z-index: 1; 
-}
-
-.tictactoe-row {
-	margin-bottom: 12px; 
-}
-
-.tictactoe-row:last-child {
-    margin-bottom: 0; 
-}
-
-.tictactoe-row:after {
-    content: "";
-    display: block;
-    clear: both; 
-}
-
-.tictactoe-cell {
-	width: 100px;
-	height: 100px;
-	margin-right: 12px;
-	float: left;
-	border-radius: 3px;
-	background: rgba(238, 228, 218, 0.35); 
-}
-
-.tictactoe-cell:last-child {
-	margin-right: 0; 
 }
 
 .selected {
