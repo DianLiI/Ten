@@ -1,0 +1,443 @@
+body {
+	background-color: #f5f5ed;
+	color:#333333;
+	padding:0;
+	margin: 0;
+	font-family: 'Orbitron', sans-serif;
+}
+
+#shell{
+	width:1024px;
+	height:auto;
+	margin-left: 250px;
+	margin-right: 200px;
+}
+
+/* header */
+
+#header h1{
+	width: 280px;
+	height:auto;
+	float: left;
+	margin-right: 130px;
+	margin-bottom: 0;
+	margin-top: 28px;
+	font-family: 'Denk One', sans-serif;
+	color:#333333;
+	font-size: 48pt;
+}
+
+h1 a{
+	text-decoration: none;
+	color:#333333;
+}
+
+
+#nav ul{
+	list-style: none;
+	width: 550px;
+	float: left;
+	margin-top: 77px;
+}
+
+#nav li{
+	float: left;
+	font-size: 18pt;
+	font-weight: 700;
+	width:auto;
+}
+
+
+#nav li:nth-child(2){
+	width:112px;
+	margin-right: 65px;
+}
+
+#nac li:last-child{
+	margin-right: 0;
+}
+
+
+
+#nav li a{
+	text-decoration: none;
+	color: #333333;
+	margin-right: 26px;
+}
+
+#nav li a:hover{
+	color: #e64135;
+}
+
+#about{
+	float: left;
+	width:930px;
+	margin-bottom: 30px;
+}
+
+#AboutText{
+	float:left;
+	width:330px;
+	margin-right: 70px;
+	margin-top: 80px;
+	margin-left: 30px;
+}
+
+#AboutText h2{
+	font-size: 23pt;
+	font-weight: 700;
+	margin-bottom: 0;
+}
+
+#AboutText p{
+	line-height: 1.5;
+	font-size: 12pt;
+	font-weight: 400;
+	margin-bottom: 0;
+}
+
+#AboutText a img{
+	margin-left: 46px;
+	margin-bottom: 0;
+}
+
+#AboutImg{
+float: left;
+margin-top: 10px;
+margin-right:0; 
+}
+
+
+#instruction{
+    border-top: 2px dashed #d6d1cc;
+	float:left;
+	width:1000px;
+	margin-bottom: 20px;
+
+}
+
+#InstructionLeft{
+	float:left;
+}
+
+#InstructionLeft h2{
+	margin-bottom: 0;
+	margin-top: 40px;
+	margin-left: 15px;
+	font-size: 23pt;
+	font-weight: 700;
+}
+
+#InstructionLeft img{
+	width:250px;
+	height:auto;
+}
+
+#video{
+	float: left;
+	background: #ffffff;
+	width:550px;
+	height:350px;
+	margin-left: 160px;
+	margin-top: 20px;
+
+}
+
+#game{
+	border-top: 2px dashed #d6d1cc;
+	float:left;
+	width:1000px;
+    border-bottom: 2px dashed #d6d1cc;
+}
+
+#GameLeft{
+	float:left;
+}
+
+#GameLeft h2{
+	margin-bottom: 0;
+	margin-top: 40px;
+	margin-left: 15px;
+	font-size: 23pt;
+	font-weight: 700;
+}
+
+#GameLeft img{
+	width:200px;
+	height:auto;
+}
+
+.players{
+	width:200px;
+}
+
+.players p{
+	font-weight: 500;
+	font-size: 14pt;
+	margin-left: 20px;
+	float: left;
+}
+
+#square1{
+	float:left;
+	width: 25px;
+	height: 25px;
+	background: #e64135;
+	margin-top: 15px;
+	margin-left: 10px;
+}
+
+#square2{
+	float:left;
+	width: 25px;
+	height: 25px;
+	background: #333333;
+	margin-top: 15px;
+	margin-left: 5px;
+}
+
+#restartb img{
+	float: left;
+	margin-top:50px;
+	margin-left: -140px;
+	width:110px;
+	height: auto;
+	cursor:pointer;
+}
+
+
+#Grid{
+	float:left;
+	width:550px;
+	height:550px;
+	margin-left: 120px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#contact{
+	margin-top: 40px;
+	float:left;
+	width:2000px;
+	background:#e64135;
+}
+
+#ContactLfet h2{
+	margin-bottom: 0;
+	margin-top: 40px;
+	margin-left: 270px;
+	font-size: 23pt;
+	font-weight: 700;
+}
+
+#ContactLfet img{
+	width:200px;
+	height:auto;
+	margin-left: 270px;
+	float: left;
+}
+
+#social{
+	width:200px;
+	margin-left: 270px;
+}
+
+#social a img{
+	width:50px;
+	height:auto;
+	float: left;
+	margin-left: 10px;
+	margin-bottom: 50px;
+
+}
+
+
+#ContactRight h2{
+	margin-bottom: 0;
+	font-size: 23pt;
+	font-weight: 700;
+}
+
+#ContactRight{
+	margin-left: 700px;
+	margin-top: -58px;
+	margin-bottom: 50px;
+}
+
+td{
+	margin-top: 5px;
+	font-size: 10pt;
+	font-weight: 400;
+}
+
+.contact{
+border-style: none;
+background-color: #ef6258;
+height: 23px;
+width: 209px;
+font-size: 12px;
+}
+
+#Message {
+border-style: none;
+background-color: #ef6258;
+height: 127px;
+width: 422px;
+font-size: 12px;
+resize: none;
+}
+
+#Send {
+background: #333333;  
+border:solid #333333;  
+border-radius: 15px; 
+height: 28px;
+width: 74px;
+color: #f5f5ed;
+font-family: "Orbitron",sans-serif;
+font-size: 12px;
+letter-spacing: 2px;
+margin-left: 10px;
+margin-top: 18px;
+}
+
+#Send:hover{
+	background: #f5f5ed;
+	color:#333333;
+	border-color: #f5f5ed;
+}
+
+
+
+#footer{
+	float:left;
+	width:2000px;
+	background:#333333;
+}
+
+#footer a{
+	text-decoration: none;
+	color: #f5f5ed;
+}
+
+#footer h3{
+     font-family: 'Denk One', sans-serif;
+     font-size:22pt;
+     float:left;
+     margin-left: 280px;
+}
+
+#footernav ul{
+	list-style: none;
+	float: left;
+	margin-top: 40px;
+	margin-left: 100px;
+}
+
+#footernav a{
+	margin-right: 10px;
+}
+
+#footernav a:hover{
+	color:#e64135;
+}
+
+#footernav li{
+	float: left;
+	font-size: 10pt;
+	font-weight: 400;
+	width:auto;
+	margin-left: 10px;
+	border-right: 1px dotted #f5f5ed;
+}
+
+#footer p{
+	float:left;
+	margin-top: 70px;
+	margin-left: -283px;
+	color:#f5f5ed;
+	font-size: 9pt;
+	font-weight: 400;
+	margin-bottom: 15px;
+}
+
+#footer img{
+	width:100px;
+	height: auto;
+}
+
+#gotop{
+    display:none;
+    width:100px;
+    height:100px;
+    position:fixed;
+    right:50px;
+    bottom:50px;
+    background:url("..//img/top.png") no-repeat 0px 0px;    
+}
+
+
+
+
+
+/*zheli kaishi */
+.game-container {
+	margin-top:0;
+	position: relative;
+	padding: 15px;
+	border:10px solid #000000;
+	border-radius: 6px;
+	width: 547px;
+	height: 547px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box; 
+}
+
+.main-board {
+	position: absolute;
+	z-index: 1; 
+}
+
+.row {
+	margin-bottom: 15px; 
+}
+
+.row:last-child {
+    margin-bottom: 0; 
+}
+
+.cell {
+	width: 155px;
+	height: 155px;
+	margin-right: 15px;
+	float: left;
+	border-radius: 3px;
+	margin-bottom: 13px;
+	background: #000000; 
+}
+
+.cell:last-child {
+	margin-right: 0; 
+}
+
+
+
+.innerCell{
+	width: 41px;
+	height: 41px;
+	margin-right: 5px;
+	margin-left: 5px;
+	margin-top: 8px;
+	float: left;
+	border-radius: 3px;
+	background: #f5f5ed;
+}
+
+
+
+
+
+	
+	
+

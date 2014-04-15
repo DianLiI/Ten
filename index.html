@@ -1,18 +1,172 @@
+<!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
-		<title>Ten</title>
-		<link href="css/jquery.gridster.min.css" rel="stylesheet">
-		<link href="css/main.css" rel="stylesheet">
-	</head>
-	<body>
-		<div class="game-container"></div>
-		<script type="text/javascript" src="js/jquery.js"></script>
-		<script src="js/move.min.js"></script>
-		<script src="js/main.js"></script>
-		<script type="text/javascript">
-			var gm = new GameManager();
-			gm.setUp();
-		</script>
+		<title>TicTacToe</title>
+		<link rel="stylesheet" type="text/css" href="css/default.css"/>
+		<link href='http://fonts.googleapis.com/css?family=Orbitron:400,500,700,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Denk+One' rel='stylesheet' type='text/css'>
+</head>
+	
+  <body >
+        <div id="shell">
+        <div id="gotop" onload="goTop();"></div>
+		<div id="header">
+		    <h1><a href="#">TIC<span style="color:#e64135;">TAC</span>TOE</a></h1>
+            <div id="nav">
+            	<ul>
+				<li><a href="#about">About</a></li>
+				<li><a href="#instruction">Instruction</a></li>
+				<li><a href="#game">Play</a></li>
+				<li><a href="#contact">Contact</a></li>	
+				</ul>
+            </div>
+        </div>
+
+        <div id="about">
+        	
+        	<div id="AboutText">
+        		<h2>About The Game</h2>
+        		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat</p>
+        		<a href="#game"><img src="img/pn.png"></a>
+
+        		
+        	</div>
+        	
+        	<div id="AboutImg">
+        		<img src="img/about.png">
+        	</div>
+        
+        
+        </div>
+
+        <div id="instruction">
+        	
+        	<div id="InstructionLeft">
+        		<h2>How To Play</h2>
+        		<img src="img/black.png">
+        	</div>
+
+        	<div id="video">
+        	</div>
+
+        </div>
+
+        <div id="game">
+
+        	<div id="GameLeft">
+        		
+        		<h2>Start The Game</h2>
+        		<img src="img/game.png">
+        		
+        		<div class="players">
+                   <p>Player 1 -</p>
+        		   <div id="square1"></div>
+                </div>
+
+                <div class="players">
+        		    <p>Player 2 -</p>
+        		  <div id="square2"></div>
+                </div>
+                 
+                 <div id="restartb">
+                <img src="img/pa.png">
+                </div>
+        	</div>
+
+        	<div id="Grid">
+            <div class="game-container">
+            </div>
+        	</div>
+
+        </div>
+     </div>
+
+        <div id="contact">
+        	
+        	<div id="ContactLfet">
+        		<h2>Contact Us</h2>
+        		<img src="img/contact.png">
+                <div id="social">
+        		<a href="#"><img src="img/fb.png"></a>
+				<a href="#"><img src="img/tt.png"></a>
+				<a href="#"> <img src="img/em.png"></a>
+            </div>
+        	</div>
+
+        	<div id="ContactRight">
+                <h2>Suggestions</h2>
+                <div id="container">
+					<div id="main">
+						<form action="contact.php" method="post">
+                            <div id="suggestion">
+                                <p class="formRed">Please complete all required(*) fields!</p></div>
+                                <table border="0">
+                                <tr>
+                                 <td>First Name (*)<!-- <span id="component10" class="formError">required</span> --></td>
+                                  <td>Last Name (*)<!-- <span id="component11" class="formError">required</span> --></td>
+                                 </tr>
+                                  <tr>
+                                 <td><input type="text" value="" size="20" maxlength="120" name="form[First]" id="First" class="contact"/></td>
+                                   <td><input type="text" value="" size="20" maxlength="120" name="form[Last]" id="Last" class="contact"></td>
+                                </tr>
+                                <tr>
+                                <td>Email Address (*)<!-- <span id="component12" class="formError">required --></span></td>
+                                <td>Phone <!-- <span id="component13" class="formNoError">Invalid Input</span> --></td>
+                               </tr>
+                                <tr>
+                                <td><input type="text" value="" size="20" maxlength="120" name="form[Email]"  class="contact"></td>
+                               <td><input type="text" value="" size="20" maxlength="120" name="form[Phone]" class="contact" ></td>
+                               </tr>
+                               <tr>
+                                <td>Message (*)</td>
+                               <!-- <td> </td> -->
+                               </tr>
+                               <tr>
+                               <td colspan="2"><textarea cols="50" rows="5" name="form[Message]" id="Message" ></textarea></td>
+                               </tr>
+                                <tr>
+                                 <td><input type="submit" value="Send" name="form[Send]" id="Send">
+                             </tr>
+                              </table>
+
+						</form>
+					</div>
+				</div>	
+					
+			</div>
+        </div>
+
+        <div id="footer">
+        	<a href="#"><h3>TICTACTOE</h3></a>
+        	
+        	<div id="footernav">
+        		<ul>
+				<li><a href="#about">About </a></li>
+				<li><a href="#instruction"> Instruction</a></li>
+				<li><a href="#game"> Play</a></li>
+				<li><a href="#contact"> Contact</a></li>	
+				</ul>
+        	</div>
+
+        	<p>&copyCopyright 2014 tictactoe. All rights reserved. Website created by: SXL</p>
+            <img src="img/sxl.png">
+
+
+         </div>
+    
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src ="js/top.js"></script>
+    <script type="text/javascript" src="js/move.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var gm = new GameManager();
+            gm.setUp();
+            $("#restartb img").click(function () {
+              gm.reset();
+            });
+          });
+    </script>
+
 	</body>
 </html>

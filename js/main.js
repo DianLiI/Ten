@@ -64,7 +64,8 @@ MouseManager.prototype.on = function (event, callback) {
 };
 
 MouseManager.prototype.off = function (event){
-	this.events[event + "1"] = this.events[event];
+	if (this.events[event] && this.events[event].length > 0)
+		this.events[event + "1"] = this.events[event];
 	if (this.events[event]) {
 		this.events[event] = [];
 	};
@@ -127,7 +128,7 @@ HTMLActuator.prototype.init = function (){
 }
 
 HTMLActuator.prototype.setOpacity = function (selector, opacity){
-	move(selector).set("opacity", opacity).end();
+	move(selector).set("opacity", opacity).duration("3s").end();
 }
 
 HTMLActuator.prototype.rotate = function (selector, deg) {
@@ -142,7 +143,7 @@ HTMLActuator.prototype.selectCell = function (grid, grids) {
 			}
 		}
 	}
-	this.setColor("." + grid.class, "rgba(238, 228, 218, 0.35)");
+	this.setColor("." + grid.class, "#000000");
 	this.setOpacity("." + grid.class, "1");
 	this.rotate("." + grid.class, 0);
 }
@@ -158,8 +159,8 @@ function GameManager(){
 	this.mouseManager;
 	this.animation;
 	this.player = 0;
-	this.playerZeroColor = "red";
-	this.playerOneColor = "blue";
+	this.playerZeroColor = "#e64135";
+	this.playerOneColor = "#333333";
 	//methods
 	this.setUp;
 };
@@ -201,6 +202,37 @@ GameManager.prototype.checkWin = function (grid) {
 	};
 	return false;
 }
+
+GameManager.prototype.reset = function () {
+	$(".game-container").empty();
+	$(".cell").off("hover");
+	$(".innerCell").off("hover");
+	$(".cell").off("click");
+	$(".innerCell").off("click");
+    this.mouseManager.off("cell-hover");
+    this.mouseManager.off("cell-click");
+	this.mouseManager.off("innerCell-click");
+	this.mouseManager.off("innerCell-hover");
+	this.setUp();
+	// this.htmlActuator.init();
+	// for (y1 = 0; y1 < 3; y1++){
+	// 	for(x1 = 0; x1 < 3; x1++){
+	// 		var grid = new Grid(146.25, {x:x1, y:y1});
+	// 		for(y2 = 0; y2 < 3; y2++){
+	// 			for(x2 = 0; x2 < 3; x2++){
+	// 				this.grids[x1][y1].cells[x2][y2].color = 0;
+	// 			}
+	// 		}
+	// 	}
+	// }
+ //    this.mouseManager.off("cell-hover");
+ //    this.mouseManager.off("cell-click");
+	// this.mouseManager.off("innerCell-click");
+	// this.mouseManager.off("innerCell-hover");
+ //    this.mouseManager.on("cell-hover");
+ //    this.mouseManager.on("cell-click");
+}
+
 GameManager.prototype.setUp = function () {
 	this.mouseManager = new MouseManager();
 	this.htmlActuator = new HTMLActuator();
@@ -234,9 +266,8 @@ GameManager.prototype.setUp = function () {
 		var y = parseInt(pos[2]);
 		if (!grids[x][y].color){
 			selector = "." + div.attr("class").split(" ")[1];
-			// self.htmlActuator.rotate(selector, 10);
 			move(selector)
-				.scale(1.5)
+				.scale(1.1)
 				.end();
 			div.mouseleave(function(){
 				self.htmlActuator.rotate(selector, 0);
@@ -311,7 +342,6 @@ GameManager.prototype.setUp = function () {
 							y = cell_y;
 							for (y1 = 0; y1 < 3; y1++){
 								for (x1 = 0; x1 < 3; x1++){
-									console.log(self.grids[x1][y1].class);
 									self.htmlActuator.setOpacity("." + self.grids[x1][y1].class, "1");
 								}
 							}
